@@ -39,7 +39,6 @@ public/vendor/horizon
 _ide_helper.php
 .sentryclirc
 
-config/logging.php
 .vscode/*
 composer.lock
 
