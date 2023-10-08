@@ -14,13 +14,15 @@ use App\Http\Controllers\AuthController;
 |
 */
 Route::group([
-    'middleware' => 'api',
     'prefix' => 'auth'
-
-], function ($router) {
+], function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
+    Route::get('/refresh', [AuthController::class, 'refresh']);
+});
+
+Route::middleware(['auth:api','api'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::post('/change-pass', [AuthController::class, 'changePassWord']);
+    Route::get('/user', [AuthController::class, 'userProfile']);
+
 });

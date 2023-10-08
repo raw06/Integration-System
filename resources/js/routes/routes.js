@@ -1,11 +1,11 @@
 import React from 'react';
 import Login from '../pages/Login';
-import App from '../App';
+import Home from '../pages/Home';
 
 const routes = [
   {
     path: '/',
-    element: <App />,
+    element: <Home />,
   },
   {
     path: '/login',

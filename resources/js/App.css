@@ -1,0 +1,25 @@
+body {
+  --primary-color: #0560d6;
+  --secondary-color: #e1e5f2;
+  --p-action-primary: #0560d6;
+  --p-interactive: #0560d6;
+  --p-action-primary-hovered: #045bcc;
+  --p-action-primary-pressed: #034daf;
+  --p-action-primary-depressed: #013175;
+  --p-border-highlight: #0560d6;
+  --p-color-bg-primary: #0560d6;
+  --p-color-bg-primary-hover: #045bcc;
+  --p-color-bg-primary-active: #034daf;
+}
+
+.wrapper-layout {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(https://material-kit-pro-react.devias.io/assets/gradient-bg.svg);
+}
