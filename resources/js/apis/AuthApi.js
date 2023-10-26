@@ -29,7 +29,7 @@ class AuthApi {
 
   static async logout() {
     const token = getToken();
-    const response = await instanceAxios.get('api/auth/logout', {
+    const response = await instanceAxios.post('api/logout', {
       headers: {
         Authorization: `Bearer ${token}`,
       },

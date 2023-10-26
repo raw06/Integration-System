@@ -19,21 +19,19 @@ function AuthProvider({ children }) {
     initAuth()
       .then((response) => {
         if (!response.user) {
-          setInitializing(false);
           removeToken();
           navigate('/login');
         } else {
           setCurrentUser(response.user);
-          setInitializing(false);
         }
+        setInitializing(false);
       })
       .catch(() => {
         setInitializing(false);
         removeToken();
         navigate('/login');
       });
-  }, []);
-
+  }, [navigate]);
   return (
     <AuthContext.Provider
       value={{

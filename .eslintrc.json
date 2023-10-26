@@ -9,8 +9,28 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "react-hooks"],
   "rules": {
-    "react/no-unescaped-entities": 0
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-one-expression-per-line": "off",
+    "implicit-arrow-linebreak": "off",
+    "react/jsx-no-bind": "off",
+    "comma-dangle": "off",
+    "react/prop-types": "warn",
+    "indent": "off",
+    "no-unused-vars": "warn",
+    "no-trailing-spaces": "off",
+    "no-underscore-dangle": "off",
+    "react/jsx-curly-newline": "off",
+    "react/no-unescaped-entities": "off",
+    "react/jsx-wrap-multilines": ["error", { "declaration": false, "assignment": false }],
+    "react-hooks/rules-of-hooks": "warn", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    "camelcase": "off",
+    "no-param-reassign": "off",
+    "react/forbid-prop-types": "off",
+    "import/prefer-default-export": "off",
+    "import/extensions": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

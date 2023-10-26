@@ -112,15 +112,16 @@ export default function Login() {
     },
   });
 
-  const onSubmit = useCallback((data, isRegister) => {
-    if (isRegister) {
-      console.log(data);
-      register(data);
-    } else {
-      console.log(data);
-      login(data);
-    }
-  }, []);
+  const onSubmit = useCallback(
+    (data, isRegister) => {
+      if (isRegister) {
+        register(data);
+      } else {
+        login(data);
+      }
+    },
+    [login, register],
+  );
 
   return (
     <Wrapper>

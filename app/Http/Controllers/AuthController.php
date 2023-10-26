@@ -71,8 +71,7 @@ class AuthController extends Controller
                 ]);
             }
             $user = User::query()->where('email', $input['email'])->first();
-            /** @var User $user */
-            return $this->createNewToken($token, $user);
+            return $this->createNewToken($token);
         } catch (ValidationException $e) {
             return response()->json([
                 'error' => $e
