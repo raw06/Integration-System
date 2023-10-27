@@ -1,5 +1,5 @@
 import { TopBar } from '@shopify/polaris';
-import { LogOutMinor, ProfileMinor } from '@shopify/polaris-icons';
+import { AppsMajor, LogOutMinor, ProfileMinor } from '@shopify/polaris-icons';
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthApi from '../../apis/AuthApi';
@@ -34,6 +34,11 @@ export default function TopBarMarkup() {
               icon: ProfileMinor,
               url: '/profile',
             },
+            currentUser.role === 0 && {
+              content: 'App partner',
+              icon: AppsMajor,
+              onAction: () => {},
+            },
             {
               content: 'Log out',
               icon: LogOutMinor,
@@ -48,5 +53,9 @@ export default function TopBarMarkup() {
       onToggle={toggleUserMenuActive}
     />
   );
-  return <TopBar userMenu={userMenuMarkup} />;
+
+  const searchFieldMarkup = (
+    <TopBar.SearchField onChange={() => {}} value={''} placeholder='Search app' showFocusBorder />
+  );
+  return <TopBar userMenu={userMenuMarkup} searchField={searchFieldMarkup} />;
 }

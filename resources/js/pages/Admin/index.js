@@ -71,7 +71,7 @@ export default function Admin() {
   );
   return (
     <Page fullWidth>
-      <ModalClient open={openClientModal} onClose={handleToggleClient} />
+      <ModalClient open={true} onClose={handleToggleClient} />
       <Layout sectioned>
         <LegacyCard>
           <Tabs tabs={tabs} selected={tabIndex} onSelect={setTabIndex}>
