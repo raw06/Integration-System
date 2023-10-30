@@ -5,11 +5,9 @@ import {
   FormLayout,
   Layout,
   LegacyCard,
-  MediaCard,
   Page,
   Text,
   TextField,
-  VideoThumbnail,
 } from '@shopify/polaris';
 import React from 'react';
 

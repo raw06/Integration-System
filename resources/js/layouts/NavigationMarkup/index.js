@@ -1,4 +1,4 @@
-import { Divider, Navigation } from '@shopify/polaris';
+import { Navigation } from '@shopify/polaris';
 import { AppsMajor, CollectionsMajor, FolderMajor } from '@shopify/polaris-icons';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
@@ -16,38 +16,38 @@ export default function NavigationMarkup() {
 
   const navMarketPlace = [
     {
-      url: '/',
+      url: '/app',
       label: 'Collections',
       icon: CollectionsMajor,
       subNavigationItems: [
         {
-          url: '#',
+          url: '/reviews',
           disabled: false,
           label: 'Reviews',
           badge: '15',
         },
         {
-          url: '#',
+          url: '/emails',
           disabled: false,
           label: 'Email Capture',
         },
         {
-          url: '#',
+          url: '/advertisement',
           disabled: false,
           label: 'Advertising',
         },
         {
-          url: '#',
+          url: '/loyalty',
           disabled: false,
           label: 'Loyalty & Rewards',
         },
         {
-          url: '#',
+          url: '/shipping',
           disabled: false,
           label: 'Shipping & Logistics',
         },
         {
-          url: '#',
+          url: '/cus-support',
           disabled: false,
           label: 'Customer support',
         },
