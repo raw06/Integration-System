@@ -4,9 +4,11 @@ import {
   DropZone,
   Form,
   FormLayout,
+  InlineError,
   InlineStack,
   LegacyCard,
   Page,
+  Select,
   TextField,
   Thumbnail,
 } from '@shopify/polaris';
@@ -15,6 +17,9 @@ import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useToast } from '../../hooks/useToast';
+import { collections } from '../../data/collections';
+import { useMutation } from 'react-query';
+import PartnerApi from '../../apis/PartnerApi';
 
 export default function Partner() {
   const { showToast } = useToast();
@@ -26,18 +31,70 @@ export default function Partner() {
     youtube_link: yup.string().url('Invalid url').max(191),
     document_link: yup.string().url('Invalid url').max(191),
     redirect: yup.string().required('Redirect URI is required').url('Invalid url'),
+    logo: yup.mixed().required('Logo is required'),
+    description_image: yup.mixed().required('Description image is required'),
   });
 
-  const { handleSubmit, control, setValue, watch } = useForm({
+  const {
+    handleSubmit,
+    control,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
+    defaultValues: {
+      collection_id: 1,
+    },
   });
 
   const logo = watch('logo');
   const desImages = watch('description_image');
+  const collectionId = watch('collection_id');
 
-  const onSubmit = useCallback((data) => {
-    console.log(data);
-  }, []);
+  const createClient = useMutation((data) => PartnerApi.create(data), {
+    onSuccess: (res) => {
+      if (!res.error) {
+        showToast({
+          message: res.message,
+          error: false,
+        });
+      } else {
+        showToast({
+          message: res.message,
+          error: true,
+        });
+      }
+    },
+    onError: (err) => {
+      showToast({
+        message: err.message,
+        error: true,
+      });
+    },
+  });
+
+  const onSubmit = useCallback(
+    (data) => {
+      const formData = new FormData();
+      Object.keys(data).forEach((key) => {
+        if (data[key]) {
+          if (key === 'description_image') {
+            const dataC = data[key];
+            Object.keys(dataC).forEach((keyC) => {
+              if (dataC[keyC]) {
+                formData.append(`description_image_${keyC}`, dataC[keyC]);
+              }
+            });
+          } else {
+            formData.append(key, data[key]);
+          }
+        }
+      });
+      createClient.mutate(formData);
+    },
+    [createClient],
+  );
 
   const handleDropLogo = useCallback(
     (_dropFiles, acceptedFiles) => {
@@ -82,6 +139,13 @@ export default function Partner() {
       setValue('description_image', acceptedFiles);
     },
     [desImages, setValue, showToast],
+  );
+
+  const handleChangeOption = useCallback(
+    (value) => {
+      setValue('collection_id', Number.parseInt(value));
+    },
+    [setValue],
   );
 
   const fileLogoUpload = !logo && (
@@ -177,9 +241,26 @@ export default function Partner() {
               />
               <Controller
                 shouldUnregister
+                name='collection_id'
+                control={control}
+                defaultValue={collectionId}
+                render={({ fieldState: { error } }) => {
+                  return (
+                    <Select
+                      label='Collection'
+                      value={collectionId}
+                      onChange={handleChangeOption}
+                      error={error?.message}
+                      options={collections}
+                    />
+                  );
+                }}
+              />
+              <Controller
+                shouldUnregister
                 name='logo'
                 control={control}
-                render={({ fieldState: { error } }) => (
+                render={() => (
                   <DropZone
                     allowMultiple={false}
                     onDrop={handleDropLogo}
@@ -187,7 +268,6 @@ export default function Partner() {
                     errorOverlayText='File type must be png,jpg,jpeg,webp'
                     type='image'
                     accept='image/*'
-                    error={error?.logo}
                   >
                     {logo ? (
                       <Thumbnail
@@ -203,11 +283,12 @@ export default function Partner() {
                   </DropZone>
                 )}
               />
+              {errors.logo && <InlineError message={errors.logo.message} fieldID='logo' />}
               <Controller
                 shouldUnregister
                 name='description_image'
                 control={control}
-                render={({ fieldState: { error } }) => (
+                render={() => (
                   <InlineStack blockAlign='end' gap={200}>
                     <div style={{ width: 114, height: 114 }}>
                       <DropZone
@@ -217,7 +298,6 @@ export default function Partner() {
                         errorOverlayText='File type must be png,jpg,jpeg,webp'
                         type='image'
                         accept='image/*'
-                        error={error?.description_image}
                       >
                         <DropZone.FileUpload />
                       </DropZone>
@@ -249,6 +329,12 @@ export default function Partner() {
                   </InlineStack>
                 )}
               />
+              {errors.description_image && (
+                <InlineError
+                  message={errors.description_image.message}
+                  fieldID='description_image'
+                />
+              )}
             </FormLayout>
           </Form>
         </LegacyCard.Section>

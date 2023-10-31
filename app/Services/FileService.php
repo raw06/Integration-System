@@ -16,7 +16,7 @@ class FileService {
     public function storeFile(array $files, string $type = 'logo') {
         return collect($files)->map(function (UploadedFile $file) use( $type) {
             $extension = $file->extension();
-            $fileName = "$type-".now()->timestamp;
+            $fileName = "$type-".now()->timestamp.rand(0,100);
             Storage::putFileAs("public/$type", $file, "$fileName.$extension");
             return config('app.url'). Storage::disk('local')->url("public/$type/$fileName.$extension");
         });

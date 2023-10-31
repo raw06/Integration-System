@@ -13,7 +13,8 @@ use Laravel\Passport\Passport;
 
 class ClientController extends ClientPassportController
 {
-    private $fileService;
+
+    private FileService $fileService;
 
     public function __construct(
         ClientRepository $clients,
@@ -69,12 +70,20 @@ class ClientController extends ClientPassportController
                 'app_link'     => 'required|max:191',
                 'redirect'     => ['required', $this->redirectRule],
                 'confidential' => 'boolean',
+                'description'  => 'required|max:191',
                 'logo'         => 'required',
-                'logo.*'       => 'mimes:jpeg,bmp,png,jpg|max:2000'
+                'logo.*'       => 'mimes:jpeg,bmp,png,jpg|max:2000',
+                'collection_id' => 'required'
             ])->validate();
-
             $logo = $request->file('logo');
+            $descriptionImages = collect($request->allFiles())->filter(function ($file, $key) {
+                return $key !== 'logo';
+            })->toArray();
 
+            $descriptionImagesLink = [];
+            if(count($descriptionImages) > 0) {
+               $descriptionImagesLink = collect($this->fileService->storeFile($descriptionImages, 'description'))->flatten()->all();
+            }
             $client = Client::create([
                 'user_id' => $request->user("api")->getAuthIdentifier(),
                 'name' => $request->name,
@@ -86,13 +95,14 @@ class ClientController extends ClientPassportController
                 'password_client' => 0,
                 'revoked' => false,
                 'app_logo' => $this->fileService->storeFile([$logo])[0],
-                'description' => '',
+                'description' => $request->description ?? '',
                 'back_link' => '',
                 'rick_text' => '',
-                'doc_link' => '',
-                'description_image' => '',
-                'youtube_link' => '',
-                'collection_id' => 1
+                'doc_link' => $request->document_link ?? '',
+                'description_image' => $descriptionImagesLink,
+                'youtube_link' => $request->youtube_link ?? '',
+                'collection_id' => $request->collection_id ?? 1,
+                'type' => 0,
             ]);
 
             if (Passport::$hashesClientSecrets) {
