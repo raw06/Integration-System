@@ -10,6 +10,7 @@ import Admin from '../../pages/Admin';
 import Profile from '../../pages/Profile';
 import ClientDetail from '../../pages/ClientDetail';
 import Partner from '../../pages/Parther';
+import ManagePartner from '../../pages/ManagePartner';
 
 export default function AppFrame() {
   const { initializing, authenticated } = useAuth();
@@ -28,7 +29,8 @@ export default function AppFrame() {
             <Route path='admin' element={<Admin />} />
             <Route path='profile' element={<Profile />} />
             <Route path='detail' element={<ClientDetail />} />
-            <Route path='/own-app' element={<Partner />} />
+            <Route path='own-app' element={<Partner />} />
+            <Route path='manage-app' element={<ManagePartner />} />
           </Route>
           <Route path='/login' element={authenticated ? <Navigate to='/' replace /> : <Login />} />
         </Routes>

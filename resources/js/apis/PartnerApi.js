@@ -11,6 +11,21 @@ class PartnerApi {
     });
     return response.data;
   }
+
+  static async get(page, search = '', option = ['all']) {
+    const token = getToken();
+    const response = await instanceAxios.get('api/client/get', {
+      params: {
+        page,
+        search,
+        status: option,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  }
 }
 
 export default PartnerApi;

@@ -27,27 +27,27 @@ class ClientController extends ClientPassportController
 
     public function forUser(Request $request)
     {
-        $page = $request->get('page');
-        $status = $request->get('status');
-        $search = $request->get('search');
+        $page = $request->get('page') ?? 1;
+        $status = $request->get('status') ?? ['all'];
+        $search = $request->get('search') ?? '';
         $userId = $request->user("api")->getAuthIdentifier();
-
         $query = Client::query()->where('user_id', $userId);
 
-        if ($status !== 'all') {
+        if (collect($status)->first() === 'all') {
+            if ($search) {
+                $query->where('name', 'like', '%'. $search . '%');
+            }
+        } else {
             if (!$search) {
                 $query->whereIn('status', $status);
             } else {
                 $query->where(function ($query) use ($status, $search) {
-                    $query->where('status', $status)
+                    $query->whereIn('status', $status)
                         ->where('name', 'like', '%'. $search . '%');
                 });
             }
-        } else {
-            if ($search) {
-                $query->where('name', 'like', '%'. $search . '%');
-            }
         }
+
 
         $clients = $query->get();
 
