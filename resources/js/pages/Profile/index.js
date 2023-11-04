@@ -1,7 +1,10 @@
 import { Card, Layout, Page, Text } from '@shopify/polaris';
 import React from 'react';
+import { useAuth } from '../../context/AuthContext';
 
 export default function Profile() {
+  const { currentUser } = useAuth();
+  console.log(currentUser);
   return (
     <Page
       primaryAction={{
@@ -18,20 +21,17 @@ export default function Profile() {
       <Layout>
         <Layout.Section variant='oneHalf'>
           <Card>
-            <Text>
-              <Text as='span' fontWeight='medium'>
+            <Text variant='headingMd'>
+              <Text as='span' fontWeight='medium' variant='bodyMd'>
                 Name:{' '}
               </Text>
-              <Text as='span'>Raw</Text>
+              <Text as='span'>{currentUser.name}</Text>
             </Text>
             <Text>
-              <Text as='span'>Link to home page:</Text>
-              <Text as='span'>https://google.com</Text>
+              <Text as='span'>Email: </Text>
+              <Text as='span'>{currentUser.email}</Text>
             </Text>
           </Card>
-        </Layout.Section>
-        <Layout.Section variant='oneHalf'>
-          <Card>1</Card>
         </Layout.Section>
       </Layout>
     </Page>

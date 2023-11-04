@@ -2,9 +2,11 @@ import { Navigation } from '@shopify/polaris';
 import { AppsMajor, CollectionsMajor, FolderMajor } from '@shopify/polaris-icons';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 export default function NavigationMarkup() {
   const location = useLocation();
+  const { currentUser } = useAuth();
 
   const navItemsAdmin = [
     {
@@ -55,9 +57,9 @@ export default function NavigationMarkup() {
     },
   ];
 
-  const navOwnApp = [
+  const navCreateApp = [
     {
-      url: '/own-app',
+      url: '/create-app',
       label: 'Build your own app',
       icon: FolderMajor,
     },
@@ -65,8 +67,13 @@ export default function NavigationMarkup() {
 
   return (
     <Navigation location={location.pathname}>
-      <Navigation.Section items={navMarketPlace} />
-      <Navigation.Section items={navOwnApp} />
+      {currentUser.role === 1 && <Navigation.Section items={navItemsAdmin} />}
+      {currentUser.role === 0 && (
+        <>
+          <Navigation.Section items={navMarketPlace} />
+          <Navigation.Section items={navCreateApp} />
+        </>
+      )}
     </Navigation>
   );
 }

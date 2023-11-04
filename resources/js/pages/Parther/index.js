@@ -40,6 +40,7 @@ export default function Partner() {
     control,
     setValue,
     watch,
+    setError,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -97,7 +98,11 @@ export default function Partner() {
   );
 
   const handleDropLogo = useCallback(
-    (_dropFiles, acceptedFiles) => {
+    (_dropFiles, acceptedFiles, _rejectFiles) => {
+      if (_rejectFiles[0]) {
+        setError('logo', { message: 'File type must be image' });
+        return;
+      }
       if (acceptedFiles[0]?.size > 2000000) {
         showToast({
           error: true,
@@ -107,7 +112,7 @@ export default function Partner() {
       }
       setValue('logo', acceptedFiles[0]);
     },
-    [setValue, showToast],
+    [setError, setValue, showToast],
   );
 
   const handleChangeDesImages = useCallback(
@@ -121,14 +126,20 @@ export default function Partner() {
   );
 
   const handleDropImageDescription = useCallback(
-    (_dropFiles, acceptedFiles) => {
+    (_dropFiles, acceptedFiles, _rejectFiles) => {
+      if (_rejectFiles[0]) {
+        setError('description_image', { message: 'File type must be image' });
+        return;
+      }
+
       if (
         (Array.isArray(acceptedFiles) && acceptedFiles.length > 4) ||
-        (Array.isArray(desImages) && desImages.length >= 4)
+        (Array.isArray(desImages) && desImages.length >= 4) ||
+        (Array.isArray(desImages) && [...desImages, ...acceptedFiles].length > 4)
       ) {
         showToast({
           error: true,
-          meesage: 'Only upload 4 images for description image',
+          message: 'Only upload 4 images for description image',
         });
         return;
       }
@@ -138,7 +149,7 @@ export default function Partner() {
       }
       setValue('description_image', acceptedFiles);
     },
-    [desImages, setValue, showToast],
+    [desImages, setError, setValue, showToast],
   );
 
   const handleChangeOption = useCallback(
@@ -341,7 +352,7 @@ export default function Partner() {
         <LegacyCard.Section>
           <InlineStack align='end'>
             <Button variant='primary' submit onClick={handleSubmit(onSubmit)}>
-              Create Partner
+              Create
             </Button>
           </InlineStack>
         </LegacyCard.Section>

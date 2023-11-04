@@ -24,6 +24,7 @@ export default function ManagePartner() {
   const [popoverActive, setPopoverActive] = useState(false);
   const [searchString, setSearchString] = useState('');
   const [option, setOption] = useState(optionList.map((x) => x.value));
+  const [hasNext, setHasNext] = useState(false);
 
   // eslint-disable-next-line no-unused-vars
   const { refetch } = useQuery(
@@ -31,7 +32,8 @@ export default function ManagePartner() {
     () => PartnerApi.get(page, searchString, option),
     {
       onSuccess: (res) => {
-        setClients(res);
+        setClients(res.data);
+        setHasNext(res.next_page_url);
       },
       keepPreviousData: true,
     },
@@ -66,6 +68,7 @@ export default function ManagePartner() {
   }, []);
 
   const activator = <Button onClick={togglePopoverActive} icon={<Icon source={FilterMajor} />} />;
+
   return (
     <Page title={<Text variant='heading3xl'>App management</Text>} fullWidth>
       <Card>
@@ -106,7 +109,7 @@ export default function ManagePartner() {
               const { id, name, status } = item;
               const clientElement = statusClient.find((element) => element.key === status);
               return (
-                <ResourceItem id={id} onClick={() => {}}>
+                <ResourceItem id={id} url={`/apps/${id}`}>
                   <div
                     style={{
                       display: 'flex',
@@ -134,7 +137,7 @@ export default function ManagePartner() {
           <Pagination
             hasPrevious={page > 1}
             onPrevious={handleBackPage}
-            hasNext={clients.length !== 0 && clients.length > 8}
+            hasNext={hasNext}
             onNext={handleNextPage}
           />
         </div>

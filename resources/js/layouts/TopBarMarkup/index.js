@@ -37,7 +37,7 @@ export default function TopBarMarkup() {
             currentUser.role === 0 && {
               content: 'App partner',
               icon: AppsMajor,
-              url: '/manage-app',
+              url: '/apps',
             },
             {
               content: 'Log out',

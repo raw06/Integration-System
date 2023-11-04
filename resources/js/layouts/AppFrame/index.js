@@ -13,7 +13,7 @@ import Partner from '../../pages/Parther';
 import ManagePartner from '../../pages/ManagePartner';
 
 export default function AppFrame() {
-  const { initializing, authenticated } = useAuth();
+  const { initializing, authenticated, currentUser } = useAuth();
 
   if (initializing) {
     return <AppSpinner />;
@@ -26,11 +26,11 @@ export default function AppFrame() {
             path='/'
             element={authenticated ? <AppLayout /> : <Navigate to='/login' replace />}
           >
-            <Route path='admin' element={<Admin />} />
+            {currentUser.role === 1 && <Route path='admin' element={<Admin />} />}
             <Route path='profile' element={<Profile />} />
-            <Route path='detail' element={<ClientDetail />} />
-            <Route path='own-app' element={<Partner />} />
-            <Route path='manage-app' element={<ManagePartner />} />
+            <Route path='create-app' element={<Partner />} />
+            <Route path='apps' element={<ManagePartner />} />
+            <Route path='apps/:id' element={<ClientDetail />} />
           </Route>
           <Route path='/login' element={authenticated ? <Navigate to='/' replace /> : <Login />} />
         </Routes>

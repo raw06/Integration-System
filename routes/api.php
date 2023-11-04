@@ -35,9 +35,13 @@ Route::middleware(['auth:api','api'])->group(function () {
     Route::get('/user', [AuthController::class, 'userProfile']);
 
     Route::group(['prefix' => 'client'], function () {
+        Route::get('/forAdmin', [ClientController::class, 'forAdmin']);
+        Route::put('/updateForAdmin/{clientId}', [ClientController::class, 'updateForAdmin']);
         Route::get('/get', [ClientController::class, 'forUser']);
         Route::post('/create', [ClientController::class, 'store']);
+        Route::get('/detail/{clientId}', [ClientController::class, 'detail']);
         Route::post('/update/{clientId}', [ClientController::class, 'update']);
+        Route::put('/updateStatus/{clientId}', [ClientController::class, 'updateStatus']);
     });
 
 });
