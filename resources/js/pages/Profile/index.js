@@ -27,6 +27,10 @@ export default function Profile() {
               </Text>
               <Text as='span'>{currentUser.name}</Text>
             </Text>
+          </Card>
+        </Layout.Section>
+        <Layout.Section variant='oneHalf'>
+          <Card>
             <Text>
               <Text as='span'>Email: </Text>
               <Text as='span'>{currentUser.email}</Text>

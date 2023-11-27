@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\AppPartnerController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,18 +22,12 @@ Route::group([
     Route::get('/refresh', [AuthController::class, 'refresh']);
 });
 
-Route::middleware(['jwt.verify'])->group(function() {
-    Route::post('/change-password', [AuthController::class, 'changePassword']);
-    Route::post('/update-profile', [AuthController::class, 'updateProfile']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
-    Route::get('/get-all-client', [ClientController::class, 'forUser']);
-    Route::post('/create-client', [ClientController::class, 'store']);
-    Route::post('/update-client/{clientId}', [ClientController::class, 'update']);
-});
-
 Route::middleware(['auth:api','api'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'userProfile']);
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
+    Route::post('/update-profile', [AuthController::class, 'updateProfile']);
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
     Route::group(['prefix' => 'client'], function () {
         Route::get('/forAdmin', [ClientController::class, 'forAdmin']);
@@ -42,6 +37,10 @@ Route::middleware(['auth:api','api'])->group(function () {
         Route::get('/detail/{clientId}', [ClientController::class, 'detail']);
         Route::post('/update/{clientId}', [ClientController::class, 'update']);
         Route::put('/updateStatus/{clientId}', [ClientController::class, 'updateStatus']);
+    });
+
+    Route::group(['prefix' => 'apps'], function () {
+        Route::get('/', [AppPartnerController::class, 'index']);
     });
 
 });

@@ -11,6 +11,8 @@ import Profile from '../../pages/Profile';
 import ClientDetail from '../../pages/ClientDetail';
 import Partner from '../../pages/Parther';
 import ManagePartner from '../../pages/ManagePartner';
+import NotFound from '../../pages/NotFound';
+import ManageApp from '../../pages/ManageApp';
 
 export default function AppFrame() {
   const { initializing, authenticated, currentUser } = useAuth();
@@ -26,11 +28,17 @@ export default function AppFrame() {
             path='/'
             element={authenticated ? <AppLayout /> : <Navigate to='/login' replace />}
           >
-            {currentUser.role === 1 && <Route path='admin' element={<Admin />} />}
+            {authenticated && currentUser.role === 1 && (
+              <>
+                <Route path='admin' element={<Admin />} />
+                <Route path='apps' element={<ManagePartner />} />
+                <Route path='apps/:id' element={<ClientDetail />} />
+              </>
+            )}
+            <Route path='apps' element={<ManageApp />} />
             <Route path='profile' element={<Profile />} />
             <Route path='create-app' element={<Partner />} />
-            <Route path='apps' element={<ManagePartner />} />
-            <Route path='apps/:id' element={<ClientDetail />} />
+            <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='/login' element={authenticated ? <Navigate to='/' replace /> : <Login />} />
         </Routes>

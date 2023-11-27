@@ -18,7 +18,7 @@ export default function NavigationMarkup() {
 
   const navMarketPlace = [
     {
-      url: '/app',
+      url: '/apps',
       label: 'Collections',
       icon: CollectionsMajor,
       subNavigationItems: [

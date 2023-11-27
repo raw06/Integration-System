@@ -23,7 +23,6 @@ import { useToast } from '../../hooks/useToast';
 export default function Admin() {
   const [tabIndex, setTabIndex] = useState(0);
   const [clients, setClients] = useState([]);
-  const [selectedItems, setSelectedItems] = useState([]);
   const [page, setPage] = useState(1);
   const [hasNext, setHasNext] = useState(false);
   const [searchString, setSearchString] = useState('');
