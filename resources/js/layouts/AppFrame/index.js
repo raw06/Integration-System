@@ -13,6 +13,7 @@ import Partner from '../../pages/Parther';
 import ManagePartner from '../../pages/ManagePartner';
 import NotFound from '../../pages/NotFound';
 import ManageApp from '../../pages/ManageApp';
+import DetailCategoryApps from '../../pages/DetailCategoryApps';
 
 export default function AppFrame() {
   const { initializing, authenticated, currentUser } = useAuth();
@@ -35,7 +36,8 @@ export default function AppFrame() {
                 <Route path='apps/:id' element={<ClientDetail />} />
               </>
             )}
-            <Route path='apps' element={<ManageApp />} />
+            <Route path='app-list/home' element={<ManageApp />} />
+            <Route path='app-list/collection/:type' element={<DetailCategoryApps />} />
             <Route path='profile' element={<Profile />} />
             <Route path='create-app' element={<Partner />} />
             <Route path='*' element={<NotFound />} />

@@ -18,38 +18,44 @@ export default function NavigationMarkup() {
 
   const navMarketPlace = [
     {
-      url: '/apps',
+      url: '/app-list/home',
       label: 'Collections',
       icon: CollectionsMajor,
       subNavigationItems: [
         {
-          url: '/reviews',
+          url: '/app-list/collection/files',
+          disabled: false,
+          label: 'Files',
+          badge: '15',
+        },
+        {
+          url: '/app-list/collection/reviews',
           disabled: false,
           label: 'Reviews',
           badge: '15',
         },
         {
-          url: '/emails',
+          url: '/app-list/collection/emails',
           disabled: false,
           label: 'Email Capture',
         },
         {
-          url: '/advertisement',
+          url: '/app-list/collection/ads',
           disabled: false,
           label: 'Advertising',
         },
         {
-          url: '/loyalty',
+          url: '/app-list/collection/loyalty',
           disabled: false,
           label: 'Loyalty & Rewards',
         },
         {
-          url: '/shipping',
+          url: '/app-list/collection/shipping',
           disabled: false,
           label: 'Shipping & Logistics',
         },
         {
-          url: '/cus-support',
+          url: '/app-list/collection/engage',
           disabled: false,
           label: 'Customer support',
         },

@@ -1,26 +1,30 @@
 const collections = [
   {
     value: 1,
-    label: 'Reviews',
+    label: 'Files',
   },
   {
     value: 2,
-    label: 'Email Capture',
+    label: 'Reviews',
   },
   {
     value: 3,
-    label: 'Advertising',
+    label: 'Email Capture',
   },
   {
     value: 4,
-    label: 'Loyalty & Rewards',
+    label: 'Advertising',
   },
   {
     value: 5,
-    label: 'Shipping & Logistics',
+    label: 'Loyalty & Rewards',
   },
   {
     value: 6,
+    label: 'Shipping & Logistics',
+  },
+  {
+    value: 7,
     label: 'Customer support',
   },
 ];

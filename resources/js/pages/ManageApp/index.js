@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   Grid,
+  Icon,
   InlineStack,
   Layout,
   LegacyStack,
@@ -16,6 +17,7 @@ import { useQuery } from 'react-query';
 import AppApi from '../../apis/AppApi';
 import AppSpinner from '../../components/AppSpinner';
 import categories from '../../data/categories';
+import { ChevronRightMinor } from '@shopify/polaris-icons';
 
 export default function ManageApp() {
   const [apps, setApps] = useState([]);
@@ -50,7 +52,12 @@ export default function ManageApp() {
                 <BlockStack>
                   <InlineStack align='space-between' blockAlign='center'>
                     <Text variant='headingMd'>{category.label}</Text>
-                    <Button variant='monochromePlain'>View all apps</Button>
+                    <Button url={category.url} variant='plain'>
+                      <InlineStack>
+                        <Text tone='success'>View all apps</Text>
+                        <Icon source={ChevronRightMinor} tone='success' />
+                      </InlineStack>
+                    </Button>
                   </InlineStack>
                   <Text variant='bodyMd' tone='subdued'>
                     {category.des}
