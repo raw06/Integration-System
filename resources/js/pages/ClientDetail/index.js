@@ -2,7 +2,6 @@ import {
   Badge,
   Box,
   Button,
-  Divider,
   DropZone,
   Form,
   FormLayout,
@@ -39,6 +38,7 @@ export default function ClientDetail() {
     app_link: yup.string().required('App link is required').url('Invalid url').max(191),
     youtube_link: yup.string().url('Invalid url').max(191),
     document_link: yup.string().url('Invalid url').max(191),
+    rick_text: yup.string().required('Rick text is required').max(191),
     redirect: yup.string().required('Redirect URI is required').url('Invalid url'),
     logo: yup.mixed().required('Logo is required'),
     description_image: yup.mixed().required('Description image is required'),
@@ -432,6 +432,25 @@ export default function ClientDetail() {
                         </Text>
                       }
                       onChange={handleChangeParther}
+                    />
+                  )}
+                />
+                <Controller
+                  shouldUnregister
+                  control={control}
+                  defaultValue={partner.rick_text}
+                  name='rick_text'
+                  render={({ field: { value }, fieldState: { error } }) => (
+                    <TextField
+                      id='rick_text'
+                      onChange={handleChangeParther}
+                      value={value}
+                      error={error?.message}
+                      label={
+                        <Text fontWeight='medium' variant='bodyMd' tone='caution'>
+                          Rick text
+                        </Text>
+                      }
                     />
                   )}
                 />

@@ -45,7 +45,6 @@ class ClientController extends ClientPassportController
         $query = Client::query()->where('user_id', $userId);
 
 
-
         if (collect($status)->first() === 'all') {
             if ($search) {
                 $query->where('name', 'like', '%'. $search . '%');
@@ -121,7 +120,7 @@ class ClientController extends ClientPassportController
                 'app_logo' => $this->fileService->storeFile([$logo])[0],
                 'description' => $request->description ?? '',
                 'back_link' => '',
-                'rick_text' => '',
+                'rick_text' => $request->rick_text ?? '',
                 'doc_link' => $request->document_link ?? '',
                 'description_image' => $descriptionImagesLink,
                 'youtube_link' => $request->youtube_link ?? '',
@@ -195,6 +194,8 @@ class ClientController extends ClientPassportController
                     'youtube_link' => $request->youtube_link ?? '',
                     'collection_id' => $request->collection_id ?? 1,
                     'description_image' =>   $descriptionImagesLink,
+                    'rick_text' => $request->rick_text ?? '',
+                    'description' => $request->description ?? ''
                 ]);
             }
             return \response()->json([

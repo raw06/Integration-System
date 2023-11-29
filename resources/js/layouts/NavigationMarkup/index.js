@@ -26,13 +26,11 @@ export default function NavigationMarkup() {
           url: '/app-list/collection/files',
           disabled: false,
           label: 'Files',
-          badge: '15',
         },
         {
           url: '/app-list/collection/reviews',
           disabled: false,
           label: 'Reviews',
-          badge: '15',
         },
         {
           url: '/app-list/collection/emails',

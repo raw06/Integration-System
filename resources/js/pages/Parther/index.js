@@ -30,6 +30,7 @@ export default function Partner() {
     app_link: yup.string().required('App link is required').url('Invalid url').max(191),
     youtube_link: yup.string().url('Invalid url').max(191),
     document_link: yup.string().url('Invalid url').max(191),
+    rick_text: yup.string().required('Rick text is required').max(191),
     redirect: yup.string().required('Redirect URI is required').url('Invalid url'),
     logo: yup.mixed().required('Logo is required'),
     description_image: yup.mixed().required('Description image is required'),
@@ -202,6 +203,19 @@ export default function Partner() {
                 render={({ field: { onChange, value }, fieldState: { error } }) => (
                   <TextField
                     label='Description'
+                    onChange={onChange}
+                    value={value}
+                    error={error?.message}
+                  />
+                )}
+              />
+              <Controller
+                shouldUnregister
+                name='rick_text'
+                control={control}
+                render={({ field: { onChange, value }, fieldState: { error } }) => (
+                  <TextField
+                    label='Rick Text'
                     onChange={onChange}
                     value={value}
                     error={error?.message}
