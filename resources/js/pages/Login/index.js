@@ -51,7 +51,6 @@ export default function Login() {
     onSuccess: (response) => {
       if (!response.error) {
         reset();
-        console.log(response);
         setToken(response.token.access_token);
         setCurrentUser(response.user);
         showToast({
@@ -60,7 +59,6 @@ export default function Login() {
         });
         navigate('/');
       } else {
-        console.log(response);
         showToast({
           message: response.message,
           error: true,

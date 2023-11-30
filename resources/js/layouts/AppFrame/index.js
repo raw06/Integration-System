@@ -7,13 +7,11 @@ import AppSpinner from '../../components/AppSpinner';
 import AppLayout from '../AppLayout';
 import Login from '../../pages/Login';
 import Admin from '../../pages/Admin';
-import Profile from '../../pages/Profile';
 import ClientDetail from '../../pages/ClientDetail';
 import Partner from '../../pages/Parther';
 import ManagePartner from '../../pages/ManagePartner';
 import NotFound from '../../pages/NotFound';
 import ManageApp from '../../pages/ManageApp';
-import DetailCategoryApps from '../../pages/DetailCategoryApps';
 import AppDetail from '../../pages/AppDetail';
 
 export default function AppFrame() {
@@ -38,9 +36,8 @@ export default function AppFrame() {
             <Route path='apps' element={<ManagePartner />} />
             <Route path='apps/:id' element={<ClientDetail />} />
             <Route path='app-list/home' element={<ManageApp />} />
-            <Route path='app-list/collection/:type' element={<DetailCategoryApps />} />
+            <Route path='app-list/collection/:type' element={<ManageApp />} />
             <Route path='app-details/:id' element={<AppDetail />} />
-            <Route path='profile' element={<Profile />} />
             <Route path='create-app' element={<Partner />} />
             <Route path='*' element={<NotFound />} />
           </Route>

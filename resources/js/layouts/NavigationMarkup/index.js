@@ -1,4 +1,4 @@
-import { Navigation } from '@shopify/polaris';
+import { Navigation, Text } from '@shopify/polaris';
 import { AppsMajor, CollectionsMajor, FolderMajor } from '@shopify/polaris-icons';
 import React from 'react';
 import { useLocation } from 'react-router-dom';

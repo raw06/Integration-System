@@ -195,7 +195,7 @@ class ClientController extends ClientPassportController
                     'collection_id' => $request->collection_id ?? 1,
                     'description_image' =>   $descriptionImagesLink,
                     'rick_text' => $request->rick_text ?? '',
-                    'description' => $request->description ?? ''
+                    'description' => $request->description ?? 'p'
                 ]);
             }
             return \response()->json([

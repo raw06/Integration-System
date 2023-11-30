@@ -25,9 +25,6 @@ Route::group([
 Route::middleware(['auth:api','api'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'userProfile']);
-    Route::post('/change-password', [AuthController::class, 'changePassword']);
-    Route::post('/update-profile', [AuthController::class, 'updateProfile']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);
 
     Route::group(['prefix' => 'client'], function () {
         Route::get('/forAdmin', [ClientController::class, 'forAdmin']);

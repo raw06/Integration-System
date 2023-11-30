@@ -24,7 +24,16 @@ class AppPartnerController extends Controller
     public function detail(Request $request) {
         $id = $request->query('id');
         $app = Client::query()->select()->where('id', $id)->first();
-        $result = collect($app)->except(['secret', 'password_client', 'personal_access_client', 'provider', 'revoked', 'updated_at', 'created_at'])->toArray();
+        $result = collect($app)->except(['secret', 'password_client', 'personal_access_client', 'provider', 'revoked', 'updated_at', 'created_at'])->map(function ($field) {
+            if(is_array($field)) {
+                return collect($field)->map(function ($x, $key) {
+                   $item['id'] =  $key;
+                   $item['url'] = $x;
+                   return $item;
+                });
+            }
+            return $field;
+        })->toArray();
         return response()->json($result);
     }
 }

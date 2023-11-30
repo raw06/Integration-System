@@ -164,7 +164,7 @@ export default function Partner() {
     <DropZone.FileUpload actionHint='Accepts file size smaller than 2MB' />
   );
   return (
-    <Page>
+    <Page title='Create App'>
       <LegacyCard>
         <LegacyCard.Section>
           <Form>

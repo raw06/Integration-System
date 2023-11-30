@@ -1,5 +1,5 @@
 import { TopBar } from '@shopify/polaris';
-import { AppsMajor, LogOutMinor, ProfileMinor } from '@shopify/polaris-icons';
+import { AppsMajor, LogOutMinor } from '@shopify/polaris-icons';
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthApi from '../../apis/AuthApi';
@@ -29,11 +29,6 @@ export default function TopBarMarkup() {
       actions={[
         {
           items: [
-            {
-              content: 'Profile',
-              icon: ProfileMinor,
-              url: '/profile',
-            },
             currentUser.role === 0 && {
               content: 'App partner',
               icon: AppsMajor,

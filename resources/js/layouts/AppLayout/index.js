@@ -1,7 +1,7 @@
 import { Frame } from '@shopify/polaris';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import NavigationMarkup from '../NavigationMarkup';
+// import NavigationMarkup from '../NavigationMarkup';
 import TopBarMarkup from '../TopBarMarkup';
 
 export default function AppLayout() {
@@ -15,7 +15,7 @@ export default function AppLayout() {
     accessibilityLabel: 'Integration System',
   };
   return (
-    <Frame logo={logo} topBar={<TopBarMarkup />} navigation={<NavigationMarkup />}>
+    <Frame logo={logo} topBar={<TopBarMarkup />}>
       <Outlet />
     </Frame>
   );
