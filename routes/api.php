@@ -39,6 +39,7 @@ Route::middleware(['auth:api','api'])->group(function () {
     Route::group(['prefix' => 'apps'], function () {
         Route::get('/', [AppPartnerController::class, 'index']);
         Route::get('detail', [AppPartnerController::class, 'detail']);
+        Route::get('search', [AppPartnerController::class, 'getBySearch']);
     });
 
 });

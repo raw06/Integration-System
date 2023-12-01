@@ -36,4 +36,13 @@ class AppPartnerController extends Controller
         })->toArray();
         return response()->json($result);
     }
+
+    public function getBySearch(Request $request) {
+        $queryValue = $request->query('value') ?? '';
+        $apps = Client::query()->where('name', 'like', "%$queryValue%")->get()->toArray();
+        $result = collect($apps)->map(function($app) {
+            return collect($app)->except(['secret', 'password_client', 'personal_access_client', 'provider', 'revoked', 'updated_at', 'created_at'])->toArray();
+        })->toArray();
+        return response()->json($result);
+    }
 }

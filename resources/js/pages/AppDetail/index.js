@@ -23,7 +23,6 @@ export default function AppDetail() {
   const navigate = useNavigate();
   const { isFetching } = useQuery(['detail'], () => AppApi.detailApp(id), {
     onSuccess: (data) => {
-      console.log(data.description_image.map((x) => x.url));
       setApp(data);
     },
     onError: () => {},
@@ -142,7 +141,7 @@ export default function AppDetail() {
                   <Text as='h2' variant='headingXl'>
                     Description
                   </Text>
-                  <Text as='p' variant='headingLg' tone='subdued'>
+                  <Text as='h3' variant='headingLg' fontWeight='regular' tone='subdued'>
                     {app.description}
                   </Text>
                 </BlockStack>

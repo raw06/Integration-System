@@ -58,7 +58,7 @@ export default function ManageApp() {
       </Page>
     );
   }
-  console.log(collection);
+
   return (
     <Page fullWidth>
       <Box>
@@ -97,7 +97,12 @@ export default function ManageApp() {
                         <BlockStack>
                           <InlineStack align='space-between' blockAlign='center'>
                             <Text variant='headingMd'>{category.label}</Text>
-                            <Button url={category.url} variant='plain'>
+                            <Button
+                              onClick={() => {
+                                setType([category.url]);
+                              }}
+                              variant='plain'
+                            >
                               <InlineStack>
                                 <Text tone='success'>View all apps</Text>
                                 <Icon source={ChevronRightMinor} tone='success' />

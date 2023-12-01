@@ -13,25 +13,27 @@ function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   const initAuth = async () => {
-    return getToken() ? AuthApi.getUser() : Promise.resolve(null);
+    return getToken() ? await AuthApi.getUser() : await Promise.resolve(null);
   };
   useEffect(() => {
-    initAuth()
-      .then((response) => {
-        if (!response.user) {
+    if (!authenticated) {
+      initAuth()
+        .then((response) => {
+          if (!response.user) {
+            removeToken();
+            navigate('/login');
+          } else {
+            setCurrentUser(response.user);
+          }
+          setInitializing(false);
+        })
+        .catch(() => {
+          setInitializing(false);
           removeToken();
           navigate('/login');
-        } else {
-          setCurrentUser(response.user);
-        }
-        setInitializing(false);
-      })
-      .catch(() => {
-        setInitializing(false);
-        removeToken();
-        navigate('/login');
-      });
-  }, [navigate]);
+        });
+    }
+  }, [authenticated, navigate]);
   return (
     <AuthContext.Provider
       value={{

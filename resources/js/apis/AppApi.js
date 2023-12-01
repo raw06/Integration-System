@@ -23,5 +23,16 @@ class AppApi {
     });
     return response.data;
   }
+
+  static async search(value = '') {
+    const token = getToken();
+    const response = await instanceAxios.get('api/apps/search', {
+      params: { value },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  }
 }
 export default AppApi;
