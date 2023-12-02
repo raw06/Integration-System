@@ -13,6 +13,7 @@ import ManagePartner from '../../pages/ManagePartner';
 import NotFound from '../../pages/NotFound';
 import ManageApp from '../../pages/ManageApp';
 import AppDetail from '../../pages/AppDetail';
+import Home from '../../pages/Home';
 
 export default function AppFrame() {
   const { initializing, authenticated, currentUser } = useAuth();
@@ -33,6 +34,7 @@ export default function AppFrame() {
                 <Route path='admin' element={<Admin />} />
               </>
             )}
+            <Route path='/' element={<Home />} />
             <Route path='apps' element={<ManagePartner />} />
             <Route path='apps/:id' element={<ClientDetail />} />
             <Route path='app-list/home' element={<ManageApp />} />

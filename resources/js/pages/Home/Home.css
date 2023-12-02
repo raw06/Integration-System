@@ -1,0 +1,26 @@
+.wrapper {
+  background-image: linear-gradient(96.24deg, rgba(0, 0, 0, 0.7) 17.59%, rgba(0, 0, 0, 0) 47.72%),
+    url('https://apps.shopify.com/cdn/shopifycloud/shopify_app_store/assets/merchant/home/texture-hero-purple-de813151af871741f195348f5d5b24b3f8914dd70c77d8feea053eb869cb1f51.png');
+  background-image:
+    linear-gradient(96.24deg, rgba(0, 0, 0, 0.7) 17.59%, rgba(0, 0, 0, 0) 47.72%),
+    -webkit-image-set(url('https://apps.shopify.com/cdn/shopifycloud/shopify_app_store/assets/merchant/home/texture-hero-purple-de813151af871741f195348f5d5b24b3f8914dd70c77d8feea053eb869cb1f51.png')
+          1x, url('https://apps.shopify.com/cdn/shopifycloud/shopify_app_store/assets/merchant/home/texture-hero-purple@2x-e3ca7f3e8c939723da9bd6b4785e403ce38742e13b436d9c1afec5aff8a4fd2c.png')
+          2x);
+  background-image: linear-gradient(96.24deg, rgba(0, 0, 0, 0.7) 17.59%, rgba(0, 0, 0, 0) 47.72%),
+    image-set(
+      url('https://apps.shopify.com/cdn/shopifycloud/shopify_app_store/assets/merchant/home/texture-hero-purple-de813151af871741f195348f5d5b24b3f8914dd70c77d8feea053eb869cb1f51.png')
+        1x,
+      url('https://apps.shopify.com/cdn/shopifycloud/shopify_app_store/assets/merchant/home/texture-hero-purple@2x-e3ca7f3e8c939723da9bd6b4785e403ce38742e13b436d9c1afec5aff8a4fd2c.png')
+        2x
+    );
+  background-position: center;
+  background-size: cover;
+}
+
+.title {
+  font-size: clamp(2.25rem, 5.625vw + 0rem, 4.5rem);
+  font-weight: 600;
+  line-height: clamp(2.813rem, 5.906vw + 0.45rem, 5.175rem);
+  letter-spacing: -0.02em;
+  color: #fff;
+}
