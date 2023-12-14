@@ -195,7 +195,8 @@ class ClientController extends ClientPassportController
                     'collection_id' => $request->collection_id ?? 1,
                     'description_image' =>   $descriptionImagesLink,
                     'rick_text' => $request->rick_text ?? '',
-                    'description' => $request->description ?? 'p'
+                    'description' => $request->description ?? 'p',
+                    'status' => 'pending'
                 ]);
             }
             return \response()->json([
@@ -315,6 +316,7 @@ class ClientController extends ClientPassportController
                     'status' => $status
                 ]);
             }
+            SendEmailToUser::dispatch($userEmail, $client)->onQueue('send-email');
             return \response()->json([
                 'error' => false,
                 'message' => 'Update client successfully'
