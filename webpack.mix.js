@@ -20,7 +20,7 @@ mix.js('resources/js/index.js', 'public/js/app.js').sourceMaps(false);
 
 mix.webpackConfig({
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js'],
         alias: {
 
         }
