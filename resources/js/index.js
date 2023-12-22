@@ -3,7 +3,7 @@ import App from './App';
 import { createRoot } from 'react-dom/client';
 import '@shopify/polaris/build/esm/styles.css';
 
-const container = document.getElementById('root');
+const container = document.getElementById('app');
 
 const root = createRoot(container);
 
