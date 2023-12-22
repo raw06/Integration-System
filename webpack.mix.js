@@ -16,4 +16,13 @@ const mix = require('laravel-mix');
 //         //
 //     ]);
 
-mix.js('resources/js/index.js', 'public/js/app.js').react().version();
+mix.js('resources/js/index.js', 'public/js/app.js').sourceMaps(false);
+
+mix.webpackConfig({
+    resolve: {
+        extensions: ['.js', '.jsx'],
+        alias: {
+
+        }
+    }
+})
