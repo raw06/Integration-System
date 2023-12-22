@@ -26,9 +26,7 @@
     "laravel-mix": "^6.0.6",
     "lodash": "^4.17.19",
     "postcss": "^8.1.14",
-    "prettier": "^3.0.2",
-    "ts-loader": "^9.4.4",
-    "typescript": "^5.2.2"
+    "prettier": "^3.0.2"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
