@@ -11,7 +11,7 @@
   },
   "plugins": ["react", "react-hooks"],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "react/jsx-one-expression-per-line": "off",
     "implicit-arrow-linebreak": "off",
     "react/jsx-no-bind": "off",
