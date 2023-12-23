@@ -98,11 +98,17 @@ export default function TopBarMarkup() {
       actions={[
         {
           items: [
-            currentUser.role === 0 && {
-              content: 'App partner',
-              icon: AppsMajor,
-              url: '/apps',
-            },
+            currentUser.role === 0
+              ? {
+                  content: 'App partner',
+                  icon: AppsMajor,
+                  url: '/apps',
+                }
+              : {
+                  content: 'Manage apps',
+                  icon: AppsMajor,
+                  url: '/admin',
+                },
             {
               content: 'Log out',
               icon: LogOutMinor,
