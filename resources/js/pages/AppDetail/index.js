@@ -34,6 +34,10 @@ export default function AppDetail() {
     navigate(url);
   }, [app.collection_id, navigate]);
 
+  const handleInstall = useCallback((link) => {
+    window.open(link);
+  }, []);
+
   if (isFetching) {
     return (
       <Page>
@@ -43,7 +47,14 @@ export default function AppDetail() {
   }
 
   return (
-    <Page fullWidth>
+    <Page
+      fullWidth
+      backAction={{
+        onAction: () => {
+          navigate(-1);
+        },
+      }}
+    >
       <Layout>
         <Layout.Section>
           <Box padding='1000' paddingInlineStart='3200' paddingInlineEnd='3200'>
@@ -59,6 +70,14 @@ export default function AppDetail() {
                   <Text as='p' variant='headingLg' fontWeight='regular'>
                     {app.rick_text}
                   </Text>
+                  <Button
+                    variant='primary'
+                    onClick={() => {
+                      handleInstall(app.app_link);
+                    }}
+                  >
+                    <Text variant='headingSm'>Install</Text>
+                  </Button>
                 </BlockStack>
               </Grid.Cell>
               <Grid.Cell columnSpan={{ lg: 7 }}>

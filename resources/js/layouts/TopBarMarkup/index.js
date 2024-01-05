@@ -1,4 +1,4 @@
-import { ActionList, Box, Thumbnail, TopBar } from '@shopify/polaris';
+import { ActionList, Thumbnail, TopBar } from '@shopify/polaris';
 import { AppsMajor, LogOutMinor } from '@shopify/polaris-icons';
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
