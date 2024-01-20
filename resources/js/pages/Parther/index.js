@@ -2,11 +2,13 @@ import {
   Box,
   Button,
   DropZone,
+  FooterHelp,
   Form,
   FormLayout,
   InlineError,
   InlineStack,
   LegacyCard,
+  Link,
   Page,
   Select,
   TextField,
@@ -371,6 +373,11 @@ export default function Partner() {
           </InlineStack>
         </LegacyCard.Section>
       </LegacyCard>
+      <FooterHelp>
+        <Link url={'https://documenter.getpostman.com/view/16942369/2s9YsT589g'} target='_blank'>
+          How to become our partner?
+        </Link>
+      </FooterHelp>
     </Page>
   );
 }

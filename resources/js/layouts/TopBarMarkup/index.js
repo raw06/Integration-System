@@ -131,6 +131,7 @@ export default function TopBarMarkup() {
       focused={false}
     />
   );
+
   return (
     <TopBar
       userMenu={userMenuMarkup}
