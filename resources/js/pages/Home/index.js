@@ -30,7 +30,6 @@ export default function Home() {
   if (isFetching) {
     return <AppSpinner />;
   }
-  console.log(apps);
   return (
     <div style={{ background: '#fff', height: '100vh' }}>
       <div className='wrapper'>

@@ -21,7 +21,6 @@ function AuthProvider({ children }) {
         .then((response) => {
           if (!response.user) {
             removeToken();
-            navigate('/login');
           } else {
             setCurrentUser(response.user);
           }
@@ -30,7 +29,6 @@ function AuthProvider({ children }) {
         .catch(() => {
           setInitializing(false);
           removeToken();
-          navigate('/login');
         });
     }
   }, [authenticated, navigate]);

@@ -29,9 +29,14 @@ export default function Login() {
 
   const [isRegister, setIsRegister] = useState(false);
 
+  const [isForgot, setIsForgot] = useState(false);
+
   const schemaLogin = yup.object().shape({
     email: yup.string().email('The email format is incorrect, please check it again.').required(),
     password: yup.string().required().min(6),
+  });
+  const schemaForgotPassword = yup.object().shape({
+    email: yup.string().email('The email format is incorrect, please check it again.').required(),
   });
 
   const schemaRegister = yup.object().shape({
@@ -102,8 +107,37 @@ export default function Login() {
     },
   );
 
+  const { mutate: forgotPassword, isLoading: isForgoting } = useMutation(
+    (data) => AuthApi.forgot(data),
+    {
+      onSuccess: (response) => {
+        if (!response.error) {
+          reset();
+          showToast({
+            message: 'Sent',
+            error: false,
+          });
+          navigate('/');
+        } else {
+          showToast({
+            message: response.message,
+            error: true,
+          });
+        }
+      },
+      onError: (err) => {
+        showToast({
+          message: err.message,
+          error: true,
+        });
+      },
+    },
+  );
+
   const { control, handleSubmit, reset, setValue } = useForm({
-    resolver: yupResolver(isRegister ? schemaRegister : schemaLogin),
+    resolver: yupResolver(
+      isRegister ? schemaRegister : !isForgot ? schemaLogin : schemaForgotPassword,
+    ),
     defaultValues: {
       email: '',
       password: '',
@@ -111,16 +145,19 @@ export default function Login() {
   });
 
   const onSubmit = useCallback(
-    (data, isRegister) => {
+    (data, isRegister, isForgot) => {
       if (isRegister) {
         register(data);
       } else {
-        login(data);
+        if (!isForgot) {
+          login(data);
+        } else {
+          forgotPassword(data);
+        }
       }
     },
-    [login, register],
+    [forgotPassword, login, register],
   );
-
   return (
     <Wrapper>
       <Page fullWidth>
@@ -137,13 +174,12 @@ export default function Login() {
               <Box as='div'>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   <Text variant='headingLg' as='h5'>
-                    Raw App
+                    Oauth App
                   </Text>
                 </div>
-
                 <div style={{ margin: '14px 0' }}>
                   <Text variant='bodyLg' as='p'>
-                    Welcome to Raw's integration community!
+                    Welcome to Oauth App's integration community!
                   </Text>
                 </div>
                 {isRegister ? (
@@ -217,7 +253,7 @@ export default function Login() {
                           />
 
                           <Button
-                            primary
+                            variant='primary'
                             onClick={handleSubmit((data) => {
                               onSubmit(data, true);
                             })}
@@ -230,7 +266,7 @@ export default function Login() {
                       </Form>
                     </div>
                   </>
-                ) : (
+                ) : !isForgot ? (
                   <>
                     <div>
                       <Text variant='heading3xl' as='h2'>
@@ -291,7 +327,7 @@ export default function Login() {
                           </div>
 
                           <Button
-                            primary
+                            variant='primary'
                             onClick={handleSubmit((data) => {
                               onSubmit(data, false);
                             })}
@@ -300,9 +336,66 @@ export default function Login() {
                           >
                             Login
                           </Button>
+
+                          <div
+                            style={{
+                              marginTop: '30px',
+                              marginBottom: '5px',
+                            }}
+                          >
+                            <Text variant='bodySm' as='p' fontWeight='medium'>
+                              Did you forget your account?{' '}
+                              <Link
+                                onClick={() => {
+                                  setIsForgot(true);
+                                  reset();
+                                }}
+                              >
+                                Click here.
+                              </Link>
+                            </Text>
+                          </div>
                         </FormLayout>
                       </Form>
                     </div>
+                  </>
+                ) : (
+                  <>
+                    <div>
+                      <Text variant='heading3xl' as='h2'>
+                        Forgot password
+                      </Text>
+                    </div>
+
+                    <Form>
+                      <FormLayout>
+                        <Controller
+                          shouldUnregister
+                          control={control}
+                          name='email'
+                          render={({ field: { onChange, value }, fieldState: { error } }) => (
+                            <TextField
+                              label='Email'
+                              value={value}
+                              onChange={onChange}
+                              error={error?.message}
+                              requiredIndicator
+                            />
+                          )}
+                        />
+
+                        <Button
+                          variant='primary'
+                          onClick={handleSubmit((data) => {
+                            onSubmit(data, false, true);
+                          })}
+                          fullWidth
+                          loading={isForgoting}
+                        >
+                          Submit
+                        </Button>
+                      </FormLayout>
+                    </Form>
                   </>
                 )}
               </Box>

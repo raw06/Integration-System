@@ -14,6 +14,7 @@ import NotFound from '../../pages/NotFound';
 import ManageApp from '../../pages/ManageApp';
 import AppDetail from '../../pages/AppDetail';
 import Home from '../../pages/Home';
+import ResetPassword from '../../pages/ForgotPassword';
 
 export default function AppFrame() {
   const { initializing, authenticated, currentUser } = useAuth();
@@ -44,6 +45,7 @@ export default function AppFrame() {
             <Route path='*' element={<NotFound />} />
           </Route>
           <Route path='/login' element={authenticated ? <Navigate to='/' replace /> : <Login />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
         </Routes>
       </ToastProvider>
     </Frame>

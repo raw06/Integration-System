@@ -36,5 +36,15 @@ class AuthApi {
     });
     return response.data;
   }
+
+  static async forgot(data) {
+    const response = await instanceAxios.post('api/reset-password', data);
+    return response.data;
+  }
+
+  static async reset(data, token) {
+    const response = await instanceAxios.put(`api/reset-password/${token}`, data);
+    return response.data;
+  }
 }
 export default AuthApi;

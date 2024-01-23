@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AppPartnerController;
+use App\Http\Controllers\ResetPasswordController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -41,5 +42,8 @@ Route::middleware(['auth:api','api'])->group(function () {
         Route::get('detail', [AppPartnerController::class, 'detail']);
         Route::get('search', [AppPartnerController::class, 'getBySearch']);
     });
-
 });
+
+Route::post('reset-password', [ResetPasswordController::class, 'sendMail']);
+Route::put('reset-password/{token}', [ResetPasswordController::class, 'reset']);
+
