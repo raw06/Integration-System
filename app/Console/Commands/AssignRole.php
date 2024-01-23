@@ -45,7 +45,7 @@ class AssignRole extends Command
         $user = User::query()->where('email', $email)->first();
         if($user) {
             try {
-                $user->update(['role' => $role]);
+                $user->update(['role' => (int)$role]);
                 $this->line('Finished');
             } catch (\Exception $exception) {
                 $this->line("Failed to assign ${exception}");
