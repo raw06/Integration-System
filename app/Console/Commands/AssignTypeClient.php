@@ -12,7 +12,7 @@ class AssignTypeClient extends Command
      *
      * @var string
      */
-    protected $signature = 'assign:client {--name=}';
+    protected $signature = 'assign:client {--clientId=}';
 
     /**
      * The console command description.
@@ -38,16 +38,13 @@ class AssignTypeClient extends Command
     public function handle()
     {
        $this->line("Starting assign...");
-       $clientName = $this->option('name');
-
-       /** @var Client $client */
-       $client = Client::query()->where('name', $clientName)->first();
+       $clientId = $this->option('clientId');
 
        try {
-           $client->update(['type' => 1]);
-           $this->line("Done");
+            Client::query()->where('id', $clientId)->update(['type' => 1]);
+            $this->line("Done");
        } catch (\Exception $exception) {
-           $this->line("Failed to assign type client ${exception}");
+            $this->line("Failed to assign type client ${exception}");
        }
     }
 }

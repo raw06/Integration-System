@@ -40,18 +40,13 @@ class AssignRole extends Command
     {
         $this->line('Start assign role...');
         $email = $this->option('email');
-        $role = $this->option('role');
-        /** @var User $user */
-        $user = User::query()->where('email', $email)->first();
-        if($user) {
-            try {
-                $user->update(['role' => (int)$role]);
-                $this->line('Finished');
-            } catch (\Exception $exception) {
-                $this->line("Failed to assign ${exception}");
-            }
-        } else {
-            $this->line('Not found user!');
+        $role = (int)$this->option('role');
+
+        try {
+             User::query()->where('email', $email)->update(['role' => $role]);
+             $this->line('Finished');
+        } catch (\Exception $exception) {
+            $this->line("Failed to assign ${exception}");
         }
     }
 }
