@@ -70,7 +70,7 @@ export default function AppDetail() {
                   <Text as='p' variant='headingLg' fontWeight='regular'>
                     {app.rick_text}
                   </Text>
-                  <Button
+                  <Button disabled={!app.app_link}
                     variant='primary'
                     onClick={() => {
                       handleInstall(app.app_link);
