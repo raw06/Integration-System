@@ -15,4 +15,12 @@ class ClientService {
         }
         return $client;
     }
+
+    public function getClientByIdAdmin($clientId) {
+        $client = Client::query()->where('id', $clientId)->first();
+        if(!$client) {
+            return null;
+        }
+        return $client;
+    }
 }

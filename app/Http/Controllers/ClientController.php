@@ -205,6 +205,7 @@ class ClientController extends ClientPassportController
                     'description_image' =>   $descriptionImagesLink,
                     'rick_text' => $request->rick_text ?? '',
                     'description' => $request->description ?? 'p',
+                    'secret' => Str::random(40),
                     'status' => 'pending'
                 ]);
             }
@@ -294,8 +295,8 @@ class ClientController extends ClientPassportController
     }
 
     public function updateForAdmin(Request $request, $clientId) {
-        $client = $this->clients->findForUser($clientId, $request->user("api")->getAuthIdentifier());
-        if (! $client) {
+        $client = $this->clientService->getClientByIdAdmin($clientId);
+        if (!$client) {
             return \response()->json([
                 'message' => 'Not found client',
                 'error' => true
