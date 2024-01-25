@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\AuthCode;
-use Laravel\Passport\Bridge\AuthCodeRepository;
 
 class AuthCodeService {
 

@@ -188,6 +188,11 @@ class ClientController extends ClientPassportController
         $existDescriptionImages = explode(',', $request->description_image ?? '');
         $descriptionImagesLink = collect($descriptionImagesLink)->merge($existDescriptionImages)->toArray();
         try {
+
+            // remove token and auth token when deactivated client
+            $this->authCodeService->removeByClientId($client->id);
+            $this->accessTokenService->removeByClientId($client->id);
+
             if($status == 'deactivated' || $status == 'approved') {
                 $client->update([
                     'status' => $status,
@@ -202,7 +207,7 @@ class ClientController extends ClientPassportController
                     'doc_link' => $request->document_link ?? '',
                     'youtube_link' => $request->youtube_link ?? '',
                     'collection_id' => $request->collection_id ?? 1,
-                    'description_image' =>   $descriptionImagesLink,
+                    'description_image' => $descriptionImagesLink,
                     'rick_text' => $request->rick_text ?? '',
                     'description' => $request->description ?? 'p',
                     'secret' => Str::random(40),
@@ -316,7 +321,7 @@ class ClientController extends ClientPassportController
 
                 // remove token and auth token when reject client
                 $this->authCodeService->removeByClientId($client->id);
-                $this->authCodeService->removeByClientId($client->id);
+                $this->accessTokenService->removeByClientId($client->id);
 
 
                 $client->update([

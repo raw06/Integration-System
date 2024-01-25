@@ -24,3 +24,11 @@
   letter-spacing: -0.02em;
   color: #fff;
 }
+
+.body {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: clamp(2.813rem, 5.906vw + 0.45rem, 5.175rem);
+  letter-spacing: -0.02em;
+  color: #fff;
+}

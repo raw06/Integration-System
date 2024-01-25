@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
 import './Home.css';
-import {
-  BlockStack,
-  Box,
-  Button,
-  Grid,
-  InlineStack,
-  Link,
-  Text,
-  Thumbnail,
-} from '@shopify/polaris';
+import { BlockStack, Box, Grid, InlineStack, Link, Text, Thumbnail } from '@shopify/polaris';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import AppApi from '../../apis/AppApi';
@@ -31,16 +22,27 @@ export default function Home() {
     return <AppSpinner />;
   }
   return (
-    <div style={{ background: '#fff', height: '100vh' }}>
+    <div style={{ background: '#fff' }}>
       <div className='wrapper'>
         <div style={{ padding: '64px' }}>
           <InlineStack align='start'>
             <Box>
               <p className='title'>Make integration</p>
               <p className='title'>with ours</p>
+              <p className='body'>
+                Become to our partners?{' '}
+                <Link
+                  monochrome
+                  url={'https://documenter.getpostman.com/view/16942369/2s9YsT589g'}
+                  target='_blank'
+                >
+                  Click here
+                </Link>
+              </p>
             </Box>
           </InlineStack>
         </div>
+        r{' '}
       </div>
       <div style={{ padding: '48px 64px' }}>
         <BlockStack gap={'1000'}>
