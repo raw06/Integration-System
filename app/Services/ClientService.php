@@ -10,7 +10,7 @@ class ClientService {
         if (!$client) {
             return false;
         }
-        if ($client->status === 'pending') {
+        if ($client->status === 'pending' || $client->status === 'rejected') {
             $client = collect($client->toArray())->except(['secret']);
         }
         return $client;

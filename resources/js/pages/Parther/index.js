@@ -53,7 +53,6 @@ export default function Partner() {
       collection_id: 1,
     },
   });
-  console.log(1);
   const logo = watch('logo');
   const desImages = watch('description_image');
   const collectionId = watch('collection_id');
