@@ -22,9 +22,11 @@ import { useToast } from '../../hooks/useToast';
 import { collections } from '../../data/collections';
 import { useMutation } from 'react-query';
 import PartnerApi from '../../apis/PartnerApi';
+import { useNavigate } from 'react-router-dom';
 
 export default function Partner() {
   const { showToast } = useToast();
+  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     name: yup.string().required('App name is required').max(191),
@@ -63,6 +65,7 @@ export default function Partner() {
           message: res.message,
           error: false,
         });
+        navigate('/apps');
       } else {
         showToast({
           message: res.message,

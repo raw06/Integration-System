@@ -111,7 +111,6 @@ class ClientController extends ClientPassportController
             $descriptionImages = collect($request->allFiles())->filter(function ($file, $key) {
                 return $key !== 'logo';
             })->toArray();
-
             $descriptionImagesLink = [];
             if(count($descriptionImages) > 0) {
                $descriptionImagesLink = collect($this->fileService->storeFile($descriptionImages, 'description'))->flatten()->all();
