@@ -317,15 +317,13 @@ class ClientController extends ClientPassportController
 
         $status = $request->status;
         try {
-            if($status && $status == 'rejected') {
+            if($status == 'rejected') {
 
                 // remove token and auth token when reject client
                 $this->authCodeService->removeByClientId($client->id);
                 $this->accessTokenService->removeByClientId($client->id);
 
-
                 $client->update([
-                    'id' => Str::orderedUuid(),
                     'secret' => Str::random(40),
                     'status' => $status
                 ]);

@@ -8,6 +8,7 @@ import {
   InlineError,
   InlineStack,
   Layout,
+  LegacyCard,
   Page,
   Text,
   TextField,
@@ -17,7 +18,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import PartnerApi from '../../apis/PartnerApi';
-import {APPROVED, DEACTIVATED, PENDING, REJECTED, status} from '../../data/status';
+import { APPROVED, DEACTIVATED, PENDING, REJECTED, status } from '../../data/status';
 import AppSpinner from '../../components/AppSpinner';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -256,7 +257,8 @@ export default function ClientDetail() {
         partner.status !== PENDING && [
           {
             content: partner.status === DEACTIVATED ? 'Active' : 'Deactivate',
-            onAction: handleUpdateStatusClient, disabled: partner.status === REJECTED
+            onAction: handleUpdateStatusClient,
+            disabled: partner.status === REJECTED,
           },
         ]
       }
